@@ -2201,6 +2201,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@wix/headless-node@npm:^1.14.0":
+  version: 1.14.0
+  resolution: "@wix/headless-node@npm:1.14.0::__archiveUrl=https%3A%2F%2Fnpm.dev.wixpress.com%2Fapi%2Fnpm%2Fnpm-repos%2F%40wix%2Fheadless-node%2F-%2Fheadless-node-1.14.0.tgz"
+  dependencies:
+    "@babel/runtime": "npm:^7.0.0"
+    "@wix/monitoring-velo": "npm:^1.7.0"
+    "@wix/sdk-runtime": "npm:^0.5.0"
+  checksum: 10c0/19a1279a7e34d4b6b94e585c7896e28a51b6941bad3af470488f43604e0b462b142e5d3d76350014899b87b5c70df474fc99eb4b405f38be4d26ab83b2240e63
+  languageName: node
+  linkType: hard
+
 "@wix/headless-site@npm:^1.10.0":
   version: 1.10.0
   resolution: "@wix/headless-site@npm:1.10.0::__archiveUrl=https%3A%2F%2Fnpm.dev.wixpress.com%2Fapi%2Fnpm%2Fnpm-repos%2F%40wix%2Fheadless-site%2F-%2Fheadless-site-1.10.0.tgz"
@@ -2271,7 +2282,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wix/monitoring-velo@npm:^1.6.0":
+"@wix/monitoring-velo@npm:^1.6.0, @wix/monitoring-velo@npm:^1.7.0":
   version: 1.7.0
   resolution: "@wix/monitoring-velo@npm:1.7.0::__archiveUrl=https%3A%2F%2Fnpm.dev.wixpress.com%2Fapi%2Fnpm%2Fnpm-repos%2F%40wix%2Fmonitoring-velo%2F-%2Fmonitoring-velo-1.7.0.tgz"
   dependencies:
@@ -7707,6 +7718,7 @@ __metadata:
     "@wix/cli": "npm:^1.1.92"
     "@wix/duplexer-js": "npm:^1.0.815"
     "@wix/essentials": "npm:^0.1.23"
+    "@wix/headless-node": "npm:^1.14.0"
     "@wix/headless-site": "npm:^1.10.0"
     "@wix/sdk": "npm:^1.15.23"
     astro: "npm:^5.8.0"

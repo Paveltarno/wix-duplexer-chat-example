@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDuplexerConsumer } from '../hooks/use-duplexer-consumer';
+
+const DEPLOY_PREVIEW_TAG_KEY = 'duplexer-deploy-preview-tag';
 
 export default function ChatApp() {
   const host = (globalThis as any).__wix_context__?.host;
@@ -7,7 +9,23 @@ export default function ChatApp() {
   const [messageInput, setMessageInput] = useState('');
   const [isPublishing, setIsPublishing] = useState(false);
   const [publishError, setPublishError] = useState<string | null>(null);
-  const { messages: duplexerMessages, isConnected } = useDuplexerConsumer({ host, channelName });
+  const [deployPreviewTag, setDeployPreviewTag] = useState('');
+  const { messages: duplexerMessages, connectionState } = useDuplexerConsumer({ host, channelName });
+
+  useEffect(() => {
+    const saved = localStorage.getItem(DEPLOY_PREVIEW_TAG_KEY);
+    if (saved) {
+      setDeployPreviewTag(saved);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (deployPreviewTag) {
+      localStorage.setItem(DEPLOY_PREVIEW_TAG_KEY, deployPreviewTag);
+    } else {
+      localStorage.removeItem(DEPLOY_PREVIEW_TAG_KEY);
+    }
+  }, [deployPreviewTag]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +47,7 @@ export default function ChatApp() {
         body: JSON.stringify({
           channelName,
           message: messageInput,
+          deployPreviewTag: deployPreviewTag || undefined,
         }),
       });
 
@@ -64,8 +83,8 @@ export default function ChatApp() {
           alignItems: 'center',
           gap: '0.5rem',
           padding: '0.25rem 0.75rem',
-          backgroundColor: isConnected ? '#d4edda' : '#f8d7da',
-          color: isConnected ? '#155724' : '#721c24',
+          backgroundColor: connectionState === 'connected' ? '#d4edda' : connectionState === 'connecting' ? '#fff3cd' : '#f8d7da',
+          color: connectionState === 'connected' ? '#155724' : connectionState === 'connecting' ? '#856404' : '#721c24',
           borderRadius: '20px',
           fontSize: '0.875rem',
           fontWeight: 'bold'
@@ -74,9 +93,9 @@ export default function ChatApp() {
             width: '8px',
             height: '8px',
             borderRadius: '50%',
-            backgroundColor: isConnected ? '#28a745' : '#dc3545'
+            backgroundColor: connectionState === 'connected' ? '#28a745' : connectionState === 'connecting' ? '#ffc107' : '#dc3545'
           }} />
-          {isConnected ? 'Connected' : 'Disconnected'}
+          {connectionState === 'connected' ? 'Connected' : connectionState === 'connecting' ? 'Connecting...' : 'Disconnected'}
         </div>
       </div>
       
@@ -91,6 +110,25 @@ export default function ChatApp() {
             value={channelName}
             onChange={(e) => setChannelName(e.target.value)}
             placeholder="Enter channel name"
+            style={{
+              width: '100%',
+              padding: '0.5rem',
+              borderRadius: '4px',
+              border: '1px solid #ccc'
+            }}
+          />
+        </div>
+
+        <div style={{ marginBottom: '1rem' }}>
+          <label htmlFor="deployPreview" style={{ display: 'block', marginBottom: '0.5rem' }}>
+            Deploy Preview Tag (optional):
+          </label>
+          <input
+            id="deployPreview"
+            type="text"
+            value={deployPreviewTag}
+            onChange={(e) => setDeployPreviewTag(e.target.value)}
+            placeholder="e.g., 6e8c3b0b53"
             style={{
               width: '100%',
               padding: '0.5rem',

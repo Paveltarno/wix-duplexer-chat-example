@@ -5,6 +5,7 @@
   "scripts": {
     "astro": "astro",
     "dev": "wix dev",
+    "sniff": "HTTP_PROXY=http://localhost:8888 HTTPS_PROXY=http://localhost:8888 NODE_TLS_REJECT_UNAUTHORIZED=0 wix dev",
     "build": "wix build",
     "wix": "wix",
     "preview": "wix preview",
@@ -16,6 +17,7 @@
     "@wix/astro": "^1.0.8",
     "@wix/duplexer-js": "^1.0.815",
     "@wix/essentials": "^0.1.23",
+    "@wix/headless-node": "^1.14.0",
     "@wix/headless-site": "^1.10.0",
     "@wix/sdk": "^1.15.23",
     "astro": "^5.8.0",
