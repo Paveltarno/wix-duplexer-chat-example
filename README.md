@@ -1,13 +1,42 @@
-# Wix Astro Blank Template
+# Wix Duplexer Chat Example
 
-Our Astro templates are still in development and subject to change.
+A simple proof-of-concept demonstrating real-time messaging with Wix Duplexer.
 
-To use a template, follow the [Wix CLI for Headless Quick Start](https://dev.wix.com/docs/go-headless/develop-your-project/wix-managed-headless/get-started/quick-start), and select the desired template during the setup process.
+## Setup
 
-## Need help?
+1. Install dependencies:
+```bash
+yarn install
+```
 
-For documentation and support, check out:
+2. Create `.env.local` with your Wix app credentials:
+```env
+WIX_CLIENT_ID="your-app-def-id"
+WIX_CLIENT_SECRET="your-client-secret"
+WIX_CLIENT_PUBLIC_KEY="-----BEGIN PUBLIC KEY-----...-----END PUBLIC KEY-----"
+WIX_CLIENT_INSTANCE_ID="your-instance-id"
+```
 
-- [Wix Headless Documentation](https://dev.wix.com/docs/go-headless)
-- [Wix SDK Documentation](https://dev.wix.com/docs/sdk)
-- [Community on Discord](https://discord.gg/n6TBrSnYTp)
+3. Update `wix.config.json` with your app and site IDs
+
+4. Update the `appDefId` in `src/hooks/use-duplexer-consumer.ts`
+
+## Run
+
+```bash
+yarn dev
+```
+
+Navigate to `http://localhost:4321/`
+
+## Deploy Preview Support
+
+Enter a deploy preview tag in the UI to test against a specific Duplexer deployment. The tag is persisted in localStorage.
+
+## Debug with Charles
+
+```bash
+yarn sniff
+```
+
+Requires Charles Proxy running on port 8888.
