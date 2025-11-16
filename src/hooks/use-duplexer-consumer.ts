@@ -38,7 +38,7 @@ export function useDuplexerConsumer({ channelName }: { host: Host; channelName: 
     });
 
     connectionRef.current = duplexerRef.current.connect({
-      appDefId: '22bef345-3c5b-4c18-b782-74d4085112ff',
+      appDefId: '9de89294-f4a7-4df3-9c5f-d9fd04f4dbea',
     });
 
     connectionRef.current.on('@duplexer:connected', () => {
