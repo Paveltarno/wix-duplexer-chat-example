@@ -20,4 +20,17 @@ export default defineConfig({
   },
 
   output: "server",
+
+  vite: {
+    optimizeDeps: {
+      include: ['@wix/duplexer-js'],
+      esbuildOptions: {
+        define: {
+          'process.env': '{}',
+          'process.version': '""',
+          'process.platform': '"browser"',
+        },
+      },
+    },
+  },
 });
